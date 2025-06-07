@@ -14,6 +14,7 @@
         <module>rabbit-media-service</module>
         <module>rabbit-collect-service</module>
         <module>rabbit-iot-service</module>
+        <module>rabbit-media-api</module>
     </modules>
     <version>1.0-SNAPSHOT</version>
 

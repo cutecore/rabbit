@@ -6,6 +6,8 @@ import com.cutec.common.config.UserThreadLocal;
 import com.cutec.common.enums.CustomError;
 import com.cutec.common.error.CustomizeException;
 import com.cutec.common.response.Result;
+import com.cutec.meida.api.MediaApi;
+import com.cutec.meida.api.vo.Media;
 import com.cutec.user.entity.User;
 import com.cutec.user.param.LoginParam;
 import com.cutec.user.service.UserService;
@@ -13,6 +15,7 @@ import com.cutec.user.utils.JWTUtils;
 import com.cutec.user.vo.LoginResult;
 import com.cutec.user.vo.UserInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -80,5 +83,15 @@ public class UserController {
     @GetMapping("/auth/codes")
     public Result<List<String>> authCodes() {
         return new Result<>(new ArrayList<>());
+    }
+
+
+    @Autowired
+    MediaApi mediaApi;
+
+    @GetMapping("/test")
+    public Result<Media> test() {
+        Result<Media> media = mediaApi.get(4701167);
+        return media;
     }
 }
