@@ -1,4 +1,4 @@
-host: 100.64.1.4
+host: 192.168.31.31
 
 server:
   port: 8081
@@ -18,7 +18,22 @@ influx:
 
 spring:
   application:
-    name: coral
+    name: media
+
+  cloud:
+    consul:
+      host: ${host}
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        register: true
+        enabled: true
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+        health-check-timeout: 5s
+        health-check-critical-timeout: 1m
+
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${host}:3306/coral?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&rewriteBatchedStatements=true
@@ -75,3 +90,13 @@ wechat:
 media:
   proxy: 192.168.31.22
   port: 10809
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

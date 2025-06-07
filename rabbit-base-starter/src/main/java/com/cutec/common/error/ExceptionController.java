@@ -24,7 +24,7 @@ public class ExceptionController {
         UserThreadLocal.user.remove();
 
         //  打印异常堆栈信息
-//        ex.printStackTrace();
+        ex.printStackTrace();
 
         //  处理异常 处理 http code
         if (ex instanceof CustomizeException cex) {
