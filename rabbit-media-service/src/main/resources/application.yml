@@ -1,0 +1,77 @@
+host: 100.64.1.4
+
+server:
+  port: 8081
+
+iotdb:
+  datasource:
+    url: jdbc:iotdb://{host}:6667/
+    username: root
+    password: root
+    driver-class-name: org.apache.iotdb.jdbc.IoTDBDriver
+
+influx:
+  url: http://${host}:8086
+  token: -gZF3hjwred9GOAElor090MgV_XLckhyAT1qNsj8MusMeuvdQbt7tFvXkcsntNz1yr2t_xrl0vS-9EhAjr1n4A==
+  org: coral
+  bucket: media
+
+spring:
+  application:
+    name: coral
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${host}:3306/coral?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    username: root
+    password: mysql#Portal_2022
+    hikari:
+      maximum-pool-size: 50       # 最大连接数
+      minimum-idle: 10            # 最小空闲连接数
+      idle-timeout: 30000         # 连接最大空闲时间
+      max-lifetime: 600000        # 连接最大生命周期
+      connection-timeout: 30000   # 获取连接的最大等待时间
+      pool-name: HikariCP777          # 连接池名称
+  mybatis:
+    configuration:
+      map-underscore-to-camel-case: true
+  output:
+    ansi:
+      enabled: ALWAYS
+  data:
+    mongodb:
+      uri: mongodb://${host}:27017/coral_log
+    redis:
+      host: ${host}
+      password: redis#portal_2022
+  kafka:
+    bootstrap-servers:
+      - ${host}:9092
+#    consumer:
+##      group-id: group_id               # 消费者组 ID
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      max-poll-records: 100
+#      # 自动提交偏移量的时间间隔
+#      auto-commit-interval: 1000
+#      # 是否自动提交偏移量
+#      enable-auto-commit: true
+#      # 最早的偏移量
+#      auto-offset-reset: earliest
+#      properties:
+#        spring.json.trusted.packages: "*" # 配置可信任的包，用于 JSON 反序列化
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+
+jwt: cutec-foo-boo-47
+jwt-expiration: 525600 #  365天
+
+wechat:
+  appId: appId
+  secret: secret
+
+media:
+  proxy: 192.168.31.22
+  port: 10809
